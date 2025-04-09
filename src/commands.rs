@@ -48,4 +48,19 @@ pub enum Command {
         #[structopt(name = "wallet")]
         wallet_name: String,
     },
+
+    /// Get the transaction history for a wallet (by name or address)
+    GetHistory {
+        /// Wallet name or public key address (hex)
+        wallet_name_or_key: String,
+    },
+
+    /// Get the entire state of the blockchain (all blocks)
+    GetState,
+
+    /// Get a specific block by its index
+    GetBlock {
+        /// Index of the block to retrieve
+        index: u64,
+    },
 }

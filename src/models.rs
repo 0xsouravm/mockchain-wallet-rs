@@ -1,8 +1,8 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// A cryptographic key pair for a wallet.
-/// 
+///
 /// Contains the private and public keys as hex-encoded strings.
 #[derive(Serialize, Deserialize, Clone)]
 pub struct KeyPair {
@@ -13,7 +13,7 @@ pub struct KeyPair {
 }
 
 /// Collection of wallets stored by name.
-/// 
+///
 /// Maps wallet names to their corresponding key pairs.
 #[derive(Serialize, Deserialize, Default)]
 pub struct Wallets {

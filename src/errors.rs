@@ -1,5 +1,4 @@
 use std::fmt;
-use tonic::Status;
 use std::io;
 
 /// Custom error types for the blockchain wallet CLI.

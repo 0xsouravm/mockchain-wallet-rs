@@ -3,14 +3,58 @@ syntax = "proto3";
 package blockchain;
 
 service BlockchainService {
-    // Submit a new transaction to the blockchain
-    rpc SubmitTransaction (Transaction) returns (TransactionResponse);
-    
-    // Get balance for a wallet address
-    rpc GetBalance (BalanceRequest) returns (BalanceResponse);
-    
-    // Request coins from the faucet
-    rpc RequestFaucet (FaucetRequest) returns (FaucetResponse);
+  // Submit a new transaction to the blockchain
+  rpc SubmitTransaction(Transaction) returns (TransactionResponse);
+
+  // Get balance for a wallet address
+  rpc GetBalance(BalanceRequest) returns (BalanceResponse);
+
+  // Request coins from the faucet
+  rpc RequestFaucet(FaucetRequest) returns (FaucetResponse);
+
+  // gets the history of transactions for a wallet address
+  rpc GetHistory(HistoryRequest) returns (HistoryResponse);
+  // gets the complete state of the blockchain
+  rpc GetState(GetStateRequest) returns (StateResponse);
+
+    // get the block by index
+  rpc GetBlock(GetBlockRequest) returns (GetBlockResponse);
+}
+
+message GetStateRequest {
+string address=1;
+}
+
+
+message GetBlockRequest {
+  uint64 index = 1; // index of the block
+}
+message GetBlockResponse {
+  Block block = 1;
+  }
+
+
+message StateResponse {
+    repeated Block blocks = 1;
+}
+
+message Block {
+    uint64 index = 1; // index of the block in the chain
+    int64 timestamp = 2; // timestamp of the block
+    repeated Transaction transactions = 3; // the array of transactions for the block
+    string previousHash = 4; // hash of the previous block
+    string hash = 5; // hash of the block
+    uint64 nonce = 6; // nonce used to mine the block
+    string miner = 7; // miner's public key as hex
+}
+
+
+message HistoryRequest {
+  string address = 1; // sender's public key as hex
+}
+
+message HistoryResponse {
+  repeated Transaction transactions = 1; // the array of transactions for the address
 }
 
 message Transaction {
